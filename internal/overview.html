@@ -706,31 +706,31 @@
       <div class="card p-8">
         <span class="pill pill-free">永続無料 / FREE</span>
         <div class="ja-display text-3xl mt-3 mb-4">¥0</div>
-        <ul class="text-sm space-y-2" style="color:var(--muted)">
-          <li>✓ OCR チェックイン無制限</li>
-          <li>✓ 写真 / 星 / テイスティングノート</li>
-          <li>✓ Public feed / Kudos 1-tap / Comment</li>
-          <li>✓ 検索・フィルタ（grade / pref / rice / SMV / 精米歩合）</li>
-          <li>✓ 銘柄詳細（taste profile chart）</li>
-          <li>✓ Profile + 47都道府県マップ</li>
-          <li>✓ Romaji 併記 (英語圏フレンドリー)</li>
+        <ul class="text-sm space-y-2.5" style="color:var(--muted);line-height:1.8">
+          <li>✓ OCR チェックインは無制限</li>
+          <li>✓ 写真・星・テイスティングノートの記録</li>
+          <li>✓ 公開フィード / Kudos（一タップ反応）/ コメント</li>
+          <li>✓ 検索・フィルタ（特定名称・都道府県・原料米・日本酒度・精米歩合）</li>
+          <li>✓ 銘柄詳細ページ（味わいチャート付き）</li>
+          <li>✓ プロフィール + 47都道府県マップ</li>
+          <li>✓ Romaji 併記表示（英語圏ユーザー向け）</li>
         </ul>
       </div>
       <div class="card p-8" style="border-color: rgba(200,169,115,.5)">
         <span class="pill pill-pro">PRO ・ 近日公開</span>
-        <div class="ja-display text-3xl mt-3 mb-4">¥480 / 月 <span class="text-sm" style="color:var(--muted)">(目安)</span></div>
-        <ul class="text-sm space-y-2" style="color:var(--muted)">
-          <li>★ Personalized recommendations</li>
-          <li>★ Where-to-buy alerts (Tippsy / Rakuten / Amazon)</li>
-          <li>★ WSET Mastery — 7 style / 6 rice / SMV badge ツリー + flashcard</li>
-          <li>★ Advanced taste-profile analytics (0.1 rating 粒度)</li>
-          <li>★ Wishlist + 蔵元別ファン度</li>
-          <li>★ Year in Sake (年間レポート)</li>
+        <div class="ja-display text-3xl mt-3 mb-4">¥480 / 月 <span class="text-sm" style="color:var(--muted)">（目安）</span></div>
+        <ul class="text-sm space-y-2.5" style="color:var(--muted);line-height:1.8">
+          <li>★ あなた好みのレコメンド（Personalized recommendations）</li>
+          <li>★ 入手先アラート（Tippsy / Rakuten / Amazon の在庫通知）</li>
+          <li>★ WSET Mastery —— 7 style / 6 rice / SMV のバッジツリー + flashcard 学習</li>
+          <li>★ 高精度の味わい分析（0.1 粒度のレーティング）</li>
+          <li>★ ウィッシュリスト + 蔵元別の応援メーター</li>
+          <li>★ Year in Sake（年間レポート）</li>
         </ul>
       </div>
     </div>
-    <p class="mt-6 text-sm" style="color:var(--muted);max-width:720px">
-      Phase 3: 蔵元向け B2B ダッシュボード（$99-499/月想定 · Untappd B2B型）。B2C UGC が貯まってから商品化。
+    <p class="mt-6 text-sm" style="color:var(--muted);max-width:760px;line-height:2">
+      Phase 3 として、蔵元向けの B2B ダッシュボードを想定（月額 $99〜499、Untappd B2B 型）。B2C で UGC が十分に貯まってから商品化する流れ。
     </p>
   </div>
 </section>
@@ -808,20 +808,20 @@
           <tr><td>Frontend</td><td>TanStack Start + TypeScript + Tailwind (via Lovable)</td></tr>
           <tr><td>Backend</td><td>Supabase sakedex-prod / Tokyo (Auth / Postgres / Storage / Edge Functions)</td></tr>
           <tr><td>OCR</td><td>Anthropic Claude vision (claude-opus-4-7) via Supabase Edge Function</td></tr>
-          <tr><td>Hosting</td><td>Vercel (Phase 6 で接続予定)</td></tr>
-          <tr><td>Build env</td><td>Lovable.dev (MVP scaffolding) — Free tier daily 5 credits 運用</td></tr>
-          <tr><td>Domain</td><td>sakedex.io (取得予定 · Phase 6 タイミング)</td></tr>
-          <tr><td>i18n</td><td>EN / JA + 文化アクセント残し（Phase 5）</td></tr>
+          <tr><td>Hosting</td><td>Vercel（Phase 6 で接続予定）</td></tr>
+          <tr><td>Build env</td><td>Lovable.dev（MVP scaffolding）—— Free tier の daily 5 credits で運用</td></tr>
+          <tr><td>Domain</td><td>sakedex.io（Phase 6 で取得予定）</td></tr>
+          <tr><td>i18n</td><td>EN / JA + 文化アクセント残し（Phase 5 で実装）</td></tr>
         </table>
         <h3 class="ja-display text-2xl mt-10 mb-4">検証シグナル<span class="en-sub text-base ml-3">— Validation Signals</span></h3>
         <table class="spec w-full">
-          <tr><td>Reddit r/Sake post (5/8)</td><td>5 score · 11 cmt · 0.69 upvote ratio (5/10 baseline)</td></tr>
-          <tr><td>Quality of comments</td><td>◎ freemium要請×2 / OCR + label flatten 要望×2 / 戦略懐疑×1 / 競合発見×1</td></tr>
-          <tr><td>OCR live in prod</td><td>✓ 花陽浴・桐生善で brand/brewer/prefecture/class/rice 全フィールド抽出に物理成功 (5/10)</td></tr>
-          <tr><td>Auth → DB → Storage</td><td>✓ /signup → /onboarding → /checkin → check_ins INSERT + label-photos upload まで動作証明 (5/10)</td></tr>
-          <tr><td>Seed DB</td><td>1,296銘柄 (1294 + 花陽浴/桐生善 user contributed) / 41都道府県 / 126蔵</td></tr>
-          <tr><td>Trademark</td><td>"Sakedex" 4DB 未登録 / sakedex.io 空き</td></tr>
-          <tr><td>UX motivation research</td><td>10 サービス分析 (Vivino/Untappd/Sakenomy/Letterboxd/Beli/Strava/Duolingo/Goodreads/Last.fm/Pokémon GO)</td></tr>
+          <tr><td>Reddit r/Sake 投稿（5/8）</td><td>score 5 ・ コメント 11 ・ upvote ratio 0.69（5/10 時点）</td></tr>
+          <tr><td>コメントの質</td><td>◎ freemium 要請 ×2 / OCR + ラベル平坦化要望 ×2 / 戦略懐疑 ×1 / 競合発見 ×1</td></tr>
+          <tr><td>OCR 本番動作</td><td>✓ 花陽浴・桐生善で brand / brewer / prefecture / class / rice の全フィールド抽出を物理確認（5/10）</td></tr>
+          <tr><td>認証→DB→Storage</td><td>✓ /signup → /onboarding → /checkin → check_ins INSERT + label-photos upload まで通し動作（5/10）</td></tr>
+          <tr><td>初期 DB</td><td>1,296 銘柄（1,294 + 花陽浴・桐生善のユーザー寄稿）/ 41 都道府県 / 126 蔵元</td></tr>
+          <tr><td>商標・ドメイン</td><td>"Sakedex" 4 DB 未登録 / sakedex.io 空き</td></tr>
+          <tr><td>動機 UX リサーチ</td><td>10 サービス分析（Vivino / Untappd / Sakenomy / Letterboxd / Beli / Strava / Duolingo / Goodreads / Last.fm / Pokémon GO）</td></tr>
         </table>
       </div>
       <div>
