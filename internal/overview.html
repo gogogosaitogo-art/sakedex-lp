@@ -35,10 +35,20 @@
   h1, h2, .ja-display {
     font-family: 'Shippori Mincho B1','Noto Serif JP', serif;
     font-weight: 600;
-    letter-spacing: .02em;
-    line-height: 1.45;
+    letter-spacing: .015em;
+    line-height: 1.5;
+    /* 日本語の自然な改行: フレーズ単位 (Safari 17+/Chrome 119+) */
+    word-break: auto-phrase;
+    line-break: strict;
+    overflow-wrap: break-word;
   }
-  h3 { font-family: 'Shippori Mincho B1','Noto Serif JP', serif; font-weight: 500; letter-spacing: .02em; line-height: 1.5; }
+  /* SP では line-height を少し詰めて行間ふらつき防止 */
+  @media (max-width: 640px) {
+    h1, h2, .ja-display { line-height: 1.45; letter-spacing: .01em; }
+  }
+  h3 { font-family: 'Shippori Mincho B1','Noto Serif JP', serif; font-weight: 500; letter-spacing: .02em; line-height: 1.55; word-break: auto-phrase; line-break: strict; }
+  /* 本文段落も日本語の禁則を適用 */
+  p { word-break: auto-phrase; line-break: strict; overflow-wrap: break-word; }
   /* serif (英語装飾) は Cormorant Garamond */
   .serif-en { font-family: 'Cormorant Garamond', serif; letter-spacing: .005em; font-weight: 500; }
   .serif { font-family: 'Shippori Mincho B1','Noto Serif JP', serif; letter-spacing: .02em; font-weight: 500; }
@@ -166,24 +176,30 @@
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div>
         <div class="chip mb-6">VIVINO FOR JAPANESE SAKE</div>
-        <h1 class="ja-display text-5xl md:text-6xl leading-tight mb-4">
-          あなたの日本酒体験を、<br>
-          <span class="accent">一枚の地図に。</span>
+        <h1 class="ja-display text-3xl sm:text-4xl md:text-6xl mb-4">
+          あなたの日本酒体験を、<span class="accent">一枚の地図に。</span>
         </h1>
-        <p class="en-sub text-xl mb-7">— Your sake journey, mapped.</p>
-        <p class="text-base" style="color:var(--muted);line-height:2.05">
-          海外の日本酒ファンが、出会った一本を写真1枚で記録する。<br>
-          OCR が銘柄・蔵元・特定名称を自動抽出し、英語ファーストでコミュニティが育つ。<br>
+        <p class="en-sub text-lg sm:text-xl mb-7">— Your sake journey, mapped.</p>
+        <p class="text-base mb-3" style="color:var(--muted);line-height:2">
+          海外の日本酒ファンが、出会った一本を写真1枚で記録する。OCR が銘柄・蔵元・特定名称を自動抽出し、英語ファーストでコミュニティが育つ。
+        </p>
+        <p class="text-base" style="color:var(--muted);line-height:2">
           <span class="accent">Made in Tokyo —— 東京から発信する、日本酒の世界地図。</span>
         </p>
-        <div class="card p-5 mt-7" style="border-color:rgba(200,169,115,.4)">
-          <div class="ja-display text-xs accent mb-3" style="letter-spacing:.2em">★ NORTH STAR</div>
-          <div class="ja-display text-base" style="color:var(--text);line-height:2">
-            <span class="accent">壱</span> 使って楽しい。&nbsp;
-            <span class="accent">弐</span> もっと日本酒が好きになる。&nbsp;
-            <span class="accent">参</span> 日本酒好きの仲間が増える。
+        <div class="card p-5 sm:p-6 mt-7" style="border-color:rgba(200,169,115,.4)">
+          <div class="text-xs accent mb-4" style="letter-spacing:.25em;font-family:'Inter',sans-serif">★ NORTH STAR</div>
+          <div class="space-y-2">
+            <div class="ja-display text-base sm:text-lg" style="color:var(--text)">
+              <span class="accent inline-block mr-3" style="font-size:1.15em">壱</span>使って楽しい。
+            </div>
+            <div class="ja-display text-base sm:text-lg" style="color:var(--text)">
+              <span class="accent inline-block mr-3" style="font-size:1.15em">弐</span>もっと日本酒が好きになる。
+            </div>
+            <div class="ja-display text-base sm:text-lg" style="color:var(--text)">
+              <span class="accent inline-block mr-3" style="font-size:1.15em">参</span>日本酒好きの仲間が増える。
+            </div>
           </div>
-          <div class="ja-sub text-xs mt-3">あらゆる機能・UX・課金導入はこの三軸で評価する。</div>
+          <div class="ja-sub text-xs mt-4">あらゆる機能・UX・課金導入はこの三軸で評価する。</div>
         </div>
         <div class="flex gap-3 mt-8 flex-wrap">
           <span class="chip">英語ファースト</span>
@@ -257,7 +273,7 @@
 <section class="section">
   <div class="max-w-6xl mx-auto px-6 py-16">
     <div class="chip mb-5"><span class="section-num">01</span> The Pain</div>
-    <h2 class="ja-display text-4xl md:text-5xl mb-4">写真を撮った、その先がない。</h2>
+    <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">写真を撮った、その先がない。</h2>
     <p class="en-sub text-lg mb-7">— "You took a photo of a sake bottle. Now what?"</p>
     <p class="text-base" style="color:var(--muted);max-width:720px;line-height:2">
       海外の日本酒ファンに共通するジレンマ。居酒屋で気に入った一本のラベルを撮ったあと、その先がない。
@@ -273,7 +289,7 @@
 <section class="section glow">
   <div class="max-w-6xl mx-auto px-6 py-16">
     <div class="chip mb-5"><span class="section-num">02</span> Killer Loop</div>
-    <h2 class="ja-display text-4xl md:text-5xl mb-4">撮って、読んで、残す。<span class="accent">三タップ。</span></h2>
+    <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">撮って、読んで、残す。<span class="accent">三タップ。</span></h2>
     <p class="en-sub text-lg mb-10">— Snap, auto-fill, save. Three taps.</p>
     <div class="grid md:grid-cols-3 gap-6">
       <!-- Step 1: Snap -->
@@ -367,7 +383,7 @@
 <section class="section">
   <div class="max-w-6xl mx-auto px-6 py-16">
     <div class="chip mb-5"><span class="section-num">03</span> Why Now</div>
-    <h2 class="ja-display text-4xl md:text-5xl mb-4">日本酒は、いま海を渡っている。</h2>
+    <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">日本酒は、いま海を渡っている。</h2>
     <p class="en-sub text-lg mb-10">— Sake is crossing the ocean.</p>
     <div class="grid md:grid-cols-4 gap-6">
       <div class="card p-6">
@@ -397,7 +413,7 @@
 <section class="section glow">
   <div class="max-w-6xl mx-auto px-6 py-16">
     <div class="chip mb-5"><span class="section-num">04</span> Target Users</div>
-    <h2 class="ja-display text-4xl md:text-5xl mb-4">三層に向けて、順番に届ける。</h2>
+    <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">三層に向けて、順番に届ける。</h2>
     <p class="en-sub text-lg mb-10">— Three layers, in order.</p>
     <div class="grid md:grid-cols-3 gap-6">
       <div class="card p-6">
@@ -423,7 +439,7 @@
 <section class="section">
   <div class="max-w-6xl mx-auto px-6 py-16">
     <div class="chip mb-5"><span class="section-num">05</span> Key Screens · V0.1</div>
-    <h2 class="ja-display text-4xl md:text-5xl mb-4">主要画面のラフ。</h2>
+    <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">主要画面のラフ。</h2>
     <p class="en-sub text-lg mb-10">— Detail, search, profile.</p>
     <div class="grid md:grid-cols-3 gap-8">
       <!-- Sake detail -->
@@ -592,7 +608,7 @@
 <section class="section glow">
   <div class="max-w-6xl mx-auto px-6 py-16">
     <div class="chip mb-5"><span class="section-num">06</span> Differentiation</div>
-    <h2 class="ja-display text-4xl md:text-5xl mb-4">何で勝つか。</h2>
+    <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">何で勝つか。</h2>
     <p class="en-sub text-lg mb-10">— Why Sakedex.</p>
     <div class="grid md:grid-cols-2 gap-6">
       <div class="card p-6">
@@ -623,7 +639,7 @@
 <section class="section">
   <div class="max-w-6xl mx-auto px-6 py-16">
     <div class="chip mb-5"><span class="section-num">07</span> Motivation Design</div>
-    <h2 class="ja-display text-4xl md:text-5xl mb-4">投稿者の動機を、設計する。</h2>
+    <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">投稿者の動機を、設計する。</h2>
     <p class="en-sub text-lg mb-7">— Why they keep posting.</p>
     <p class="text-base mb-10" style="color:var(--muted);max-width:760px;line-height:2">
       Vivino / Untappd / Letterboxd / Beli / Strava / Duolingo / Pokémon GO など、10 サービスの UX を分析（2026-05-10）。Sakedex の North Star 三軸に効く要素を厳選した。
@@ -678,7 +694,7 @@
 <section class="section">
   <div class="max-w-6xl mx-auto px-6 py-16">
     <div class="chip mb-5"><span class="section-num">08</span> Pricing</div>
-    <h2 class="ja-display text-4xl md:text-5xl mb-4">無料の地に、有料を植える。</h2>
+    <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">無料の地に、有料を植える。</h2>
     <p class="en-sub text-lg mb-10">— Free soil, paid orchard.</p>
     <div class="grid md:grid-cols-2 gap-6">
       <div class="card p-8">
@@ -717,7 +733,7 @@
 <section class="section glow">
   <div class="max-w-6xl mx-auto px-6 py-16">
     <div class="chip mb-5"><span class="section-num">09</span> Roadmap</div>
-    <h2 class="ja-display text-4xl md:text-5xl mb-4">いつ、何を出すか。</h2>
+    <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">いつ、何を出すか。</h2>
     <p class="en-sub text-lg mb-10">— Timeline.</p>
     <div class="grid md:grid-cols-2 gap-12">
       <div class="timeline">
@@ -777,7 +793,7 @@
 <section class="section">
   <div class="max-w-6xl mx-auto px-6 py-16">
     <div class="chip mb-5"><span class="section-num">10</span> Tech & Status</div>
-    <h2 class="ja-display text-4xl md:text-5xl mb-4">運用の骨。</h2>
+    <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">運用の骨。</h2>
     <p class="en-sub text-lg mb-10">— The bones.</p>
     <div class="grid md:grid-cols-2 gap-12">
       <div>
