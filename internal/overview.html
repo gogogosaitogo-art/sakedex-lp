@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sakedex — Service Overview (Private)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;700&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1F3A2F;
+    --accent:  #C8A973;
+    --bg:      #0E0E0E;
+    --bg2:     #161616;
+    --bg3:     #1d1d1d;
+    --text:    #F5F1E8;
+    --muted:   #9a958a;
+    --border:  #2a2a2a;
+  }
+  html { background: var(--bg); }
+  body {
+    font-family: 'Inter','Noto Sans JP',system-ui,sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  h1,h2,h3,.serif { font-family: 'Noto Serif JP','Inter',serif; letter-spacing: -.01em; }
+  .section { border-top: 1px solid var(--border); }
+  .chip {
+    display: inline-flex; align-items: center;
+    padding: .25rem .65rem; border-radius: 9999px;
+    background: rgba(200,169,115,.10);
+    color: var(--accent);
+    font-size: .72rem; font-weight: 600; letter-spacing: .04em;
+    border: 1px solid rgba(200,169,115,.25);
+  }
+  .chip-muted {
+    background: rgba(245,241,232,.06);
+    color: var(--muted);
+    border-color: var(--border);
+  }
+  .glow {
+    background:
+      radial-gradient(circle at 20% 0%, rgba(31,58,47,.6), transparent 40%),
+      radial-gradient(circle at 80% 30%, rgba(200,169,115,.18), transparent 50%);
+  }
+  .accent { color: var(--accent); }
+  .primary-bg { background: var(--primary); }
+  .accent-bg  { background: var(--accent); color: #2a200a; }
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+  .phone {
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 9 / 19.5;
+    background: #050505;
+    border: 8px solid #1a1a1a;
+    border-radius: 38px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6), inset 0 0 0 1px #2a2a2a;
+    margin: 0 auto;
+    display: flex; flex-direction: column;
+  }
+  .phone-screen { flex:1; background: var(--bg); display:flex; flex-direction:column; }
+  .topbar { height: 38px; background: rgba(255,255,255,.02); display:flex; align-items:center; justify-content:space-between; padding: 0 14px; font-size: 11px; color: var(--muted); border-bottom:1px solid #1a1a1a; }
+  .tabbar { height: 56px; background: #0a0a0a; border-top: 1px solid #1a1a1a; display:flex; align-items:center; justify-content:space-around; }
+  .tab { display:flex; flex-direction:column; align-items:center; gap:2px; font-size: 10px; color: var(--muted); }
+  .tab.active { color: var(--accent); }
+  .tab.fab { width: 46px; height: 46px; border-radius: 9999px; background: var(--accent); color: #2a200a; align-items:center; justify-content:center; box-shadow: 0 6px 16px rgba(200,169,115,.35); }
+  .tab.fab span { font-size: 22px; line-height:1; }
+  .feed-card { background: var(--bg2); border: 1px solid #1f1f1f; border-radius: 12px; overflow:hidden; }
+  .star { color: var(--accent); }
+  .skeleton { background: linear-gradient(90deg, #161616 0%, #1f1f1f 50%, #161616 100%); border-radius: 6px; }
+  .quadrant { aspect-ratio:1; background: #101010; border:1px solid #1f1f1f; border-radius:8px; position:relative; }
+  .quadrant .vline { position:absolute; left:50%; top:0; bottom:0; width:1px; background:#222; }
+  .quadrant .hline { position:absolute; top:50%; left:0; right:0; height:1px; background:#222; }
+  .quadrant .dot { position:absolute; width:10px; height:10px; border-radius:9999px; background: var(--accent); transform:translate(-50%,-50%); box-shadow: 0 0 0 3px rgba(200,169,115,.2); }
+  .axis-label { position:absolute; font-size:9px; color: var(--muted); }
+  .toc a:hover { color: var(--accent); }
+  .pill { display:inline-block; padding:2px 8px; border-radius:9999px; font-size: 11px; font-weight: 500; }
+  .pill-free { background: rgba(34,197,94,.12); color: #5cd685; border: 1px solid rgba(34,197,94,.3); }
+  .pill-pro  { background: rgba(200,169,115,.12); color: var(--accent); border: 1px solid rgba(200,169,115,.3); }
+  table.spec td { padding: 4px 0; font-size: 12px; border-bottom: 1px solid #1c1c1c; }
+  table.spec td:first-child { color: var(--muted); width: 50%; }
+  .grid-rice { display:grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+  .grid-rice .r { font-size: 9px; padding: 4px 6px; border:1px solid #2a2a2a; border-radius: 9999px; color: var(--muted); text-align:center; }
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content:""; position:absolute; left: 8px; top:0; bottom:0; width:2px; background: #2a2a2a; }
+  .tl-item { position: relative; padding-bottom: 24px; }
+  .tl-item::before { content:""; position:absolute; left:-20px; top:6px; width:14px; height:14px; border-radius:9999px; background: var(--bg); border: 2px solid var(--accent); }
+  .tl-item.done::before { background: var(--accent); }
+  .tl-item.now::before { box-shadow: 0 0 0 6px rgba(200,169,115,.18); }
+  .private-band { background: repeating-linear-gradient(45deg, rgba(255,80,80,.06), rgba(255,80,80,.06) 6px, transparent 6px, transparent 12px); }
+  .num { font-feature-settings: "tnum"; }
+  hr.div { border:none; border-top:1px solid var(--border); margin: 0; }
+  .badge-status { background: var(--primary); color: var(--text); padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight:600; letter-spacing:.04em; }
+</style>
+</head>
+<body>
+
+<!-- Privacy band -->
+<div class="private-band text-center text-xs py-2" style="color:#d8a8a8;border-bottom:1px solid var(--border)">
+  PRIVATE / DO NOT SHARE PUBLICLY — ローカル閲覧用ドラフト（協力者に見せる場合は対面 / ファイル送付のみ）
+</div>
+
+<!-- Hero -->
+<section class="glow">
+  <div class="max-w-6xl mx-auto px-6 pt-16 pb-20">
+    <div class="flex items-center justify-between mb-10">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg primary-bg flex items-center justify-center serif text-xl accent">酒</div>
+        <div class="serif text-xl">Sakedex</div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="badge-status">Phase 1–3 SHIPPED · V0.1 Core Loop Live</span>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="chip mb-6">VIVINO FOR JAPANESE SAKE</div>
+        <h1 class="serif text-5xl md:text-6xl leading-tight mb-6">
+          Your sake journey,<br><span class="accent">mapped.</span>
+        </h1>
+        <p class="text-lg" style="color:var(--muted)">
+          海外の日本酒ファンが、出会った一本を写真1枚で記録できる。<br>
+          OCR で銘柄・蔵・特定名称を自動抽出し、英語ファーストでコミュニティが育つ。<br>
+          <span class="accent">Made in Tokyo, by a sake-passionate marketer.</span>
+        </p>
+        <div class="card p-4 mt-6" style="border-color:rgba(200,169,115,.4)">
+          <div class="text-xs accent mb-2 tracking-wider">★ NORTH STAR</div>
+          <div class="text-sm" style="color:var(--text)">
+            <span class="accent">①</span> 使って楽しい &nbsp;·&nbsp;
+            <span class="accent">②</span> もっと日本酒が好きになる &nbsp;·&nbsp;
+            <span class="accent">③</span> 日本酒好きの仲間が増える
+          </div>
+          <div class="text-xs mt-2" style="color:var(--muted)">あらゆる機能・UX・課金導入はこの3軸で評価</div>
+        </div>
+        <div class="flex gap-3 mt-8 flex-wrap">
+          <span class="chip">English-first</span>
+          <span class="chip">OCR + 1-tap save</span>
+          <span class="chip">Made in Tokyo</span>
+          <span class="chip">Free forever (core)</span>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <!-- Hero phone mockup: Feed -->
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="topbar"><span class="serif accent">Sakedex</span><span>EN / 日</span></div>
+            <div class="flex-1 overflow-hidden p-3 space-y-3">
+              <div class="feed-card">
+                <div class="h-24" style="background:linear-gradient(135deg,#1F3A2F 0%, #0E0E0E 80%);position:relative;">
+                  <div class="absolute bottom-2 left-3 serif text-sm">花陽浴 <span style="font-size:10px;color:var(--muted)">(Hanaabi)</span></div>
+                </div>
+                <div class="p-2 text-xs">
+                  <div class="flex justify-between mb-1">
+                    <span style="color:var(--muted)">@sakedev_tokyo · 🇯🇵</span>
+                    <span class="star">★★★★★</span>
+                  </div>
+                  <div class="leading-snug">"Floral, melon-like, slightly effervescent. Hands down my best discovery this month."</div>
+                  <div class="flex gap-3 mt-2 items-center" style="color:var(--muted)">
+                    <span class="accent" style="font-size:13px">👏</span>
+                    <span>Kudos 24</span>
+                    <span>·</span>
+                    <span>💬 3</span>
+                    <span>·</span>
+                    <span>4h</span>
+                  </div>
+                </div>
+              </div>
+              <div class="feed-card">
+                <div class="h-24" style="background:linear-gradient(135deg,#3a2f1f 0%, #0E0E0E 80%);position:relative;">
+                  <div class="absolute bottom-2 left-3 serif text-sm">而今 <span style="font-size:10px;color:var(--muted)">(Jikon)</span></div>
+                </div>
+                <div class="p-2 text-xs">
+                  <div class="flex justify-between mb-1">
+                    <span style="color:var(--muted)">@kim_sake · 🇰🇷</span>
+                    <span class="star">★★★★☆</span>
+                  </div>
+                  <div class="leading-snug">"Cleaner than I expected. Pairs beautifully with sashimi."</div>
+                  <div class="flex gap-3 mt-2 items-center" style="color:var(--muted)">
+                    <span class="accent" style="font-size:13px">👏</span>
+                    <span>Kudos 12</span>
+                    <span>·</span>
+                    <span>💬 1</span>
+                    <span>·</span>
+                    <span>6h</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tabbar">
+              <div class="tab active"><span>📰</span>Feed</div>
+              <div class="tab"><span>🔍</span>Search</div>
+              <div class="tab fab"><span>+</span></div>
+              <div class="tab"><span>🔔</span>Inbox</div>
+              <div class="tab"><span>👤</span>Profile</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The Pain -->
+<section class="section">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="chip mb-4">THE PAIN</div>
+    <h2 class="serif text-3xl md:text-4xl mb-4">"You took a photo of a sake bottle. Now what?"</h2>
+    <p class="text-lg" style="color:var(--muted);max-width:700px">
+      海外の日本酒ファンの定番ジレンマ。居酒屋で気に入った一本のラベルを撮ったあと —— その先がない。
+      銘柄もスペックも追えず、帰国後に買おうとしても辿れない。
+    </p>
+    <p class="text-base mt-4" style="color:var(--muted)">
+      r/Sake コミュニティの一次フィードバック (2026-05): "I have a photo of the label and then... nothing." (Otherwise_Wave9374)
+    </p>
+  </div>
+</section>
+
+<!-- Killer Loop -->
+<section class="section glow">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="chip mb-4">KILLER LOOP</div>
+    <h2 class="serif text-3xl md:text-4xl mb-10">Snap → Auto-fill → Save. <span class="accent">3 taps.</span></h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Step 1: Snap -->
+      <div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="topbar"><span>Check-in</span><span>×</span></div>
+            <div class="flex-1 flex items-center justify-center" style="background:#000;position:relative">
+              <div class="w-44 h-56 rounded-lg" style="background:linear-gradient(135deg,#3a2f1f 0%, #1F3A2F 100%);position:relative;border:1px solid #2a2a2a">
+                <div class="absolute inset-0 flex items-center justify-center serif text-xl text-white opacity-90">花<br>陽<br>浴</div>
+              </div>
+              <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-14 h-14 rounded-full" style="background:#fff;opacity:.95"></div>
+            </div>
+            <div class="tabbar"><div class="tab" style="color:var(--muted)">ラベルを撮影 / Tap to capture</div></div>
+          </div>
+        </div>
+        <div class="mt-4 text-center">
+          <div class="serif text-xl mb-1">1. Snap</div>
+          <div class="text-sm" style="color:var(--muted)">ラベルを撮るだけ。FAB ボタン1タップ。</div>
+        </div>
+      </div>
+      <!-- Step 2: OCR -->
+      <div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="topbar"><span>Scanning label…</span><span>AI</span></div>
+            <div class="flex-1 p-4 space-y-3">
+              <div class="rounded-lg overflow-hidden" style="background:#1F3A2F;height:120px;position:relative">
+                <div class="absolute inset-0 flex items-center justify-center serif text-2xl text-white opacity-90">花陽浴</div>
+              </div>
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between"><span style="color:var(--muted)">Brand</span><span class="serif">花陽浴 <span style="color:var(--muted);font-size:10px">(Hanaabi)</span></span></div>
+                <div class="flex justify-between"><span style="color:var(--muted)">Brewer</span><span>南陽醸造 <span style="color:var(--muted);font-size:10px">(Nanyo)</span></span></div>
+                <div class="flex justify-between"><span style="color:var(--muted)">Class</span><span class="accent">純米大吟醸 <span style="color:var(--muted);font-size:10px">(Junmai Daiginjo)</span></span></div>
+                <div class="flex justify-between"><span style="color:var(--muted)">Rice</span><span>山田錦 <span style="color:var(--muted);font-size:10px">(Yamada Nishiki)</span></span></div>
+                <div class="flex justify-between"><span style="color:var(--muted)">Polish</span><span>40%</span></div>
+                <div class="flex justify-between"><span style="color:var(--muted)">Pref.</span><span>埼玉県 <span style="color:var(--muted);font-size:10px">(Saitama)</span></span></div>
+              </div>
+              <div class="text-xs" style="color:var(--muted)">Auto-extracted · romaji-friendly</div>
+            </div>
+            <div class="tabbar"><div class="tab" style="color:var(--muted)">これで合ってる？ / Confirm?</div></div>
+          </div>
+        </div>
+        <div class="mt-4 text-center">
+          <div class="serif text-xl mb-1">2. AI auto-fill</div>
+          <div class="text-sm" style="color:var(--muted)">Claude vision が銘柄・蔵・特定名称・米・精米歩合を自動抽出。</div>
+        </div>
+      </div>
+      <!-- Step 3: Save -->
+      <div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="topbar"><span>Add notes</span><span>Save</span></div>
+            <div class="flex-1 p-4 space-y-3 text-xs">
+              <div class="rounded-lg overflow-hidden" style="background:#1F3A2F;height:80px;position:relative">
+                <div class="absolute inset-0 flex items-center justify-center serif text-lg text-white opacity-90">花陽浴 純米大吟醸</div>
+              </div>
+              <div>
+                <div style="color:var(--muted)" class="mb-1">Rating</div>
+                <div class="text-lg star">★★★★★</div>
+              </div>
+              <div>
+                <div style="color:var(--muted)" class="mb-1">Tasting notes</div>
+                <div class="rounded p-2 leading-snug" style="background:#161616;border:1px solid #1f1f1f">Floral, melon-like. Slightly effervescent. Top discovery this month.</div>
+              </div>
+              <div class="flex justify-between" style="color:var(--muted)">
+                <span>📍 Location: off</span>
+                <span>🌐 Public</span>
+              </div>
+              <button class="w-full py-2 rounded accent-bg font-semibold">Save check-in</button>
+            </div>
+            <div class="tabbar"><div class="tab" style="color:var(--muted)">完了。Feed に共有。</div></div>
+          </div>
+        </div>
+        <div class="mt-4 text-center">
+          <div class="serif text-xl mb-1">3. Save</div>
+          <div class="text-sm" style="color:var(--muted)">星・ノート・写真。Feed に流れて、コミュニティと繋がる。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why now -->
+<section class="section">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="chip mb-4">WHY NOW</div>
+    <h2 class="serif text-3xl md:text-4xl mb-10">日本酒は、いま海を渡っている。</h2>
+    <div class="grid md:grid-cols-4 gap-6">
+      <div class="card p-6">
+        <div class="serif text-4xl accent num">¥459億</div>
+        <div class="text-sm mt-2" style="color:var(--muted)">2025年の日本酒輸出額（前年比 106%）</div>
+      </div>
+      <div class="card p-6">
+        <div class="serif text-4xl accent num">1.8x</div>
+        <div class="text-sm mt-2" style="color:var(--muted)">10年で輸出単価が 1.8倍にプレミアム化</div>
+      </div>
+      <div class="card p-6">
+        <div class="serif text-4xl accent num">数十万</div>
+        <div class="text-sm mt-2" style="color:var(--muted)">海外マニア層 (TAM) ＝ WSET ソムリエ層の 100倍</div>
+      </div>
+      <div class="card p-6">
+        <div class="serif text-4xl accent num">空白</div>
+        <div class="text-sm mt-2" style="color:var(--muted)">英語ファーストの記録 SNS は実質未成熟（先行 OneSip も停滞気味）</div>
+      </div>
+    </div>
+    <p class="mt-8 text-base" style="color:var(--muted);max-width:760px">
+      Vivino はワイン市場で 70M ユーザー / ARR $250M+ に達した。日本酒は同等のグローバル記録 SNS が存在しない —— その椅子が空いている。
+    </p>
+  </div>
+</section>
+
+<!-- Target -->
+<section class="section glow">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="chip mb-4">TARGET USERS</div>
+    <h2 class="serif text-3xl md:text-4xl mb-10">3層に向けて、順番に。</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card p-6">
+        <div class="text-xs" style="color:var(--muted)">Phase 1 (Now)</div>
+        <h3 class="serif text-2xl mt-2 mb-3">海外日本酒マニア</h3>
+        <p class="text-sm" style="color:var(--muted)">r/Sake / Discord sake コミュニティ / インバウンド観光客。<br>「写真撮ったあとどうする問題」を直撃。</p>
+      </div>
+      <div class="card p-6">
+        <div class="text-xs accent">Phase 1.5</div>
+        <h3 class="serif text-2xl mt-2 mb-3">WSET 受験者・ソムリエ</h3>
+        <p class="text-sm" style="color:var(--muted)">学習タグ・flashcard モードで sake spec を体系的に記憶。<br>有料 Pro で個別最適化。</p>
+      </div>
+      <div class="card p-6">
+        <div class="text-xs" style="color:var(--muted)">Phase 3</div>
+        <h3 class="serif text-2xl mt-2 mb-3">蔵元 (B2B)</h3>
+        <p class="text-sm" style="color:var(--muted)">B2C UGC を集約した「自蔵の海外人気ダッシュボード」。<br>輸出単価1.8倍化のなか、海外反響の可視化ニーズ顕在化。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Key Screens -->
+<section class="section">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="chip mb-4">KEY SCREENS — V0.1</div>
+    <h2 class="serif text-3xl md:text-4xl mb-10">主要画面のラフ</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Sake detail -->
+      <div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="topbar"><span>← Sake detail</span><span>♡ Save</span></div>
+            <div class="flex-1 overflow-hidden p-3 text-xs">
+              <div class="rounded-lg overflow-hidden mb-3" style="background:linear-gradient(135deg,#1F3A2F 0%, #0E0E0E 100%);height:90px;position:relative">
+                <div class="absolute bottom-2 left-3 serif text-base">花陽浴 純米大吟醸</div>
+                <div class="absolute top-2 right-2 chip" style="font-size:9px">純米大吟醸</div>
+              </div>
+              <div class="text-sm mb-2"><span style="color:var(--muted)">Brewer:</span> 南陽醸造 · 埼玉県</div>
+              <table class="spec w-full mb-3">
+                <tr><td>SMV (日本酒度)</td><td>+2.0</td></tr>
+                <tr><td>Polish (精米歩合)</td><td>40%</td></tr>
+                <tr><td>Acidity (酸度)</td><td>1.6</td></tr>
+                <tr><td>Alcohol</td><td>16%</td></tr>
+                <tr><td>Rice</td><td>山田錦</td></tr>
+                <tr><td>Method</td><td>—</td></tr>
+              </table>
+              <div class="quadrant mb-2">
+                <div class="vline"></div><div class="hline"></div>
+                <div class="dot" style="left:60%;top:35%"></div>
+                <div class="axis-label" style="top:4px;left:4px">light</div>
+                <div class="axis-label" style="bottom:4px;left:4px">rich</div>
+                <div class="axis-label" style="top:4px;right:4px">dry</div>
+                <div class="axis-label" style="bottom:4px;right:4px">sweet</div>
+              </div>
+              <div style="color:var(--muted)" class="text-[10px]">Community: ★★★★★ 4.8 (24 check-ins)</div>
+            </div>
+            <div class="tabbar"><div class="tab fab"><span>+</span></div></div>
+          </div>
+        </div>
+        <div class="mt-3 text-center text-sm" style="color:var(--muted)">Sake Detail · 4-quadrant taste profile</div>
+      </div>
+
+      <!-- Search & Filter -->
+      <div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="topbar"><span>Search</span><span>Filter ●</span></div>
+            <div class="flex-1 overflow-hidden p-3 text-xs space-y-3">
+              <div class="rounded-lg p-2" style="background:#161616;border:1px solid #1f1f1f">🔍 <span style="color:var(--muted)">Search by brand, brewer…</span></div>
+              <div>
+                <div style="color:var(--muted)" class="mb-1 text-[10px]">SAKE CLASS</div>
+                <div class="flex flex-wrap gap-1">
+                  <span class="chip" style="font-size:9px">純米吟醸</span>
+                  <span class="chip-muted chip" style="font-size:9px">純米</span>
+                  <span class="chip" style="font-size:9px">純米大吟醸</span>
+                  <span class="chip-muted chip" style="font-size:9px">大吟醸</span>
+                </div>
+              </div>
+              <div>
+                <div style="color:var(--muted)" class="mb-1 text-[10px]">PREFECTURE</div>
+                <div class="flex flex-wrap gap-1">
+                  <span class="chip-muted chip" style="font-size:9px">京都</span>
+                  <span class="chip" style="font-size:9px">山形</span>
+                  <span class="chip-muted chip" style="font-size:9px">新潟</span>
+                  <span class="chip-muted chip" style="font-size:9px">+38</span>
+                </div>
+              </div>
+              <div>
+                <div style="color:var(--muted)" class="mb-1 text-[10px]">RICE</div>
+                <div class="grid-rice">
+                  <div class="r">山田錦</div><div class="r">五百万石</div><div class="r">美山錦</div><div class="r">雄町</div><div class="r">祝</div>
+                </div>
+              </div>
+              <div>
+                <div style="color:var(--muted)" class="mb-1 text-[10px]">SMV (日本酒度)</div>
+                <div class="h-2 rounded-full" style="background:linear-gradient(90deg, #1F3A2F, var(--accent))"></div>
+                <div class="flex justify-between mt-1" style="color:var(--muted);font-size:9px"><span>−15 sweet</span><span>+15 dry</span></div>
+              </div>
+            </div>
+            <div class="tabbar"><div class="tab" style="color:var(--muted)">141 sakes match</div></div>
+          </div>
+        </div>
+        <div class="mt-3 text-center text-sm" style="color:var(--muted)">Search & Filter · grade / pref / rice / SMV</div>
+      </div>
+
+      <!-- Profile -->
+      <div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="topbar"><span>Profile</span><span>⚙</span></div>
+            <div class="flex-1 overflow-hidden p-3 text-xs">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-14 h-14 rounded-full primary-bg flex items-center justify-center serif accent text-2xl">酒</div>
+                <div>
+                  <div class="serif text-base">@sakedev_tokyo</div>
+                  <div style="color:var(--muted)" class="text-[10px]">🇯🇵 Tokyo · WSET student</div>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-2 mb-3 text-center">
+                <div class="card p-2"><div class="serif text-lg accent num">42</div><div class="text-[10px]" style="color:var(--muted)">check-ins</div></div>
+                <div class="card p-2"><div class="serif text-lg accent num">31</div><div class="text-[10px]" style="color:var(--muted)">unique sakes</div></div>
+              </div>
+              <div style="color:var(--muted)" class="text-[10px] mb-1">47 都道府県マップ <span class="accent">12 / 47</span></div>
+              <div class="rounded p-2 mb-3" style="background:#101010;border:1px solid #1f1f1f">
+                <div class="grid grid-cols-12 gap-[2px]">
+                  <!-- 47 prefecture grid: filled (visited) vs muted (not yet) -->
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent)"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent);opacity:.7"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent)"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent);opacity:.5"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent)"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent);opacity:.6"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent);opacity:.8"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent)"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent);opacity:.4"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent);opacity:.7"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent);opacity:.5"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent)"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:var(--accent);opacity:.6"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                  <div class="aspect-square rounded-[1px]" style="background:#1d1d1d"></div>
+                </div>
+              </div>
+              <div style="color:var(--muted)" class="text-[10px] mb-1">RECENT</div>
+              <div class="space-y-1">
+                <div class="feed-card p-1"><div class="serif text-[10px]">花陽浴 (Hanaabi)</div><div class="text-[9px] star">★★★★★</div></div>
+              </div>
+            </div>
+            <div class="tabbar"><div class="tab active"><span>👤</span>Profile</div></div>
+          </div>
+        </div>
+        <div class="mt-3 text-center text-sm" style="color:var(--muted)">Profile · 47都道府県マップ + collection 進捗</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Differentiation -->
+<section class="section glow">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="chip mb-4">DIFFERENTIATION</div>
+    <h2 class="serif text-3xl md:text-4xl mb-10">なぜ Sakedex か。</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card p-6">
+        <div class="serif text-xl mb-2 accent">1. English-first × multilingual-ready</div>
+        <p class="text-sm" style="color:var(--muted)">EN / JA から start。中・韓・タイ語は Phase 1.5 視野。日本国内向けアプリ（さけのわ等）と棲み分け、Vivino と同じ順序で英語起点でグローバル展開。</p>
+      </div>
+      <div class="card p-6">
+        <div class="serif text-xl mb-2 accent">2. OCR + 1-tap save loop</div>
+        <p class="text-sm" style="color:var(--muted)">最新の Claude vision で曲面ラベル・草書体・複数銘柄同瓶も読む。「写真撮ってどうする問題」を 3 タップで解決。Killer feature として全機能を従属させる。</p>
+      </div>
+      <div class="card p-6">
+        <div class="serif text-xl mb-2 accent">3. Made in Tokyo</div>
+        <p class="text-sm" style="color:var(--muted)">蔵元への物理アクセス・専門誌・流通現場・SAKE COMPETITION 等の一次情報。新銘柄・限定品の早期登録で米国先行アプリより 1ヶ月先行。「日本から発信する sake」としてナラティブを差別化。</p>
+      </div>
+      <div class="card p-6">
+        <div class="serif text-xl mb-2 accent">4. Free forever (core) — Pro for power users</div>
+        <p class="text-sm" style="color:var(--muted)">記録・コミュニティ・検索・フィルタは永久無料。Pro はレコメンド・where-to-buy alerts・WSET学習。r/Sake コミュニティの「freemium 必須・$1/月以外払わない」声に正面から答える。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Motivation Design (NEW) -->
+<section class="section">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="chip mb-4">MOTIVATION DESIGN</div>
+    <h2 class="serif text-3xl md:text-4xl mb-4">なぜ続けるか —— 投稿者の動機を設計する。</h2>
+    <p class="text-base mb-10" style="color:var(--muted);max-width:760px">
+      Vivino / Untappd / Letterboxd / Beli / Strava / Duolingo / Pokémon GO 等 10 サービスの UX 分析（2026-05-10）から、Sakedex の North Star 3軸に効く要素を厳選。
+    </p>
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <div class="card p-6">
+        <div class="text-xs accent mb-2">① 楽しい × ② 好きになる</div>
+        <div class="serif text-xl mb-3">47都道府県 Sakedex</div>
+        <p class="text-sm" style="color:var(--muted)">Pokémon GO / Sakenomy / Untappd 流。Profile に「47県中 N 県制覇 / 1294 銘柄中 N 本」のマップ可視化。発見の喜び + WSET 学習の prefecture/rice/style カバー要件と直結。</p>
+        <div class="mt-3"><span class="pill pill-free">Phase 4 同梱</span></div>
+      </div>
+      <div class="card p-6">
+        <div class="text-xs accent mb-2">③ 仲間が増える</div>
+        <div class="serif text-xl mb-3">Kudos 1-tap</div>
+        <p class="text-sm" style="color:var(--muted)">Strava 流。社交動作は無料、深い分析は Pro。freemium 課金抵抗マニア層 (KneeOnShoe) の retention に最適化。</p>
+        <div class="mt-3"><span class="pill pill-free">Phase 4 同梱</span></div>
+      </div>
+      <div class="card p-6">
+        <div class="text-xs accent mb-2">② 好きになる</div>
+        <div class="serif text-xl mb-3">Romaji 併記 (Lv1)</div>
+        <p class="text-sm" style="color:var(--muted)">「花陽浴 (Hanaabi)」「純米大吟醸 (Junmai Daiginjo)」。漢字オンリーで「読めない・検索できない・シェアできない」死蔵問題を解消。戦略Y根幹リスク対策。</p>
+        <div class="mt-3"><span class="pill pill-free">Phase 4 同梱</span></div>
+      </div>
+      <div class="card p-6">
+        <div class="text-xs accent mb-2">① 楽しい × ② 好きになる</div>
+        <div class="serif text-xl mb-3">WSET Mastery Badge ツリー</div>
+        <p class="text-sm" style="color:var(--muted)">Untappd × Duolingo × Pokémon GO 流。7 style / 6 rice / SMV 別 badge を WSET 試験範囲に紐付けて受験勉強アプリ化。Pro 課金 hook 最有力候補。</p>
+        <div class="mt-3"><span class="pill pill-pro">Phase 5+ / Pro</span></div>
+      </div>
+      <div class="card p-6">
+        <div class="text-xs accent mb-2">① 楽しい</div>
+        <div class="serif text-xl mb-3">A/B 比較 Rating</div>
+        <p class="text-sm" style="color:var(--muted)">Beli 流。「数値直入力」させず「A と B どっちが好き？」で rating 確定。認知負荷激減、Otherwise_Wave9374「dead-simple save」要望直撃。</p>
+        <div class="mt-3"><span class="pill pill-muted" style="background:rgba(245,241,232,.06);color:var(--muted);border:1px solid var(--border)">V0.2 検討</span></div>
+      </div>
+      <div class="card p-6">
+        <div class="text-xs accent mb-2">③ 仲間が増える</div>
+        <div class="serif text-xl mb-3">Year in Sake</div>
+        <p class="text-sm" style="color:var(--muted)">Letterboxd × Last.fm 流。年間 N 本以上で「Year in Sake」レポート解放。Reddit / X 用 flex コンテンツ。1 年データ蓄積後に解禁。</p>
+        <div class="mt-3"><span class="pill pill-muted" style="background:rgba(245,241,232,.06);color:var(--muted);border:1px solid var(--border)">V0.2+</span></div>
+      </div>
+    </div>
+    <div class="card p-6" style="background:rgba(255,80,80,.04);border-color:rgba(255,80,80,.2)">
+      <div class="text-xs mb-2" style="color:#d8a8a8">⚠ DO NOT IMPLEMENT</div>
+      <div class="serif text-lg mb-2">Streak (連続チェックイン日数)</div>
+      <p class="text-sm" style="color:var(--muted)">Untappd / Duolingo 王道だが <strong>飲酒文脈で連続日数強要は倫理問題</strong>（gamification 倫理論文 on arxiv）。Sakedex は採用せず、「週1本 / 月3本」のゆるい cadence badge で代替する。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="chip mb-4">PRICING</div>
+    <h2 class="serif text-3xl md:text-4xl mb-10">無料の地に有料を植える。</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card p-8">
+        <span class="pill pill-free">FREE FOREVER</span>
+        <div class="serif text-3xl mt-3 mb-4">¥0</div>
+        <ul class="text-sm space-y-2" style="color:var(--muted)">
+          <li>✓ OCR チェックイン無制限</li>
+          <li>✓ 写真 / 星 / テイスティングノート</li>
+          <li>✓ Public feed / Kudos 1-tap / Comment</li>
+          <li>✓ 検索・フィルタ（grade / pref / rice / SMV / 精米歩合）</li>
+          <li>✓ 銘柄詳細（taste profile chart）</li>
+          <li>✓ Profile + 47都道府県マップ</li>
+          <li>✓ Romaji 併記 (英語圏フレンドリー)</li>
+        </ul>
+      </div>
+      <div class="card p-8" style="border-color: rgba(200,169,115,.5)">
+        <span class="pill pill-pro">PRO — Coming soon</span>
+        <div class="serif text-3xl mt-3 mb-4">¥480 / mo <span class="text-sm" style="color:var(--muted)">(目安)</span></div>
+        <ul class="text-sm space-y-2" style="color:var(--muted)">
+          <li>★ Personalized recommendations</li>
+          <li>★ Where-to-buy alerts (Tippsy / Rakuten / Amazon)</li>
+          <li>★ WSET Mastery — 7 style / 6 rice / SMV badge ツリー + flashcard</li>
+          <li>★ Advanced taste-profile analytics (0.1 rating 粒度)</li>
+          <li>★ Wishlist + 蔵元別ファン度</li>
+          <li>★ Year in Sake (年間レポート)</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-6 text-sm" style="color:var(--muted);max-width:720px">
+      Phase 3: 蔵元向け B2B ダッシュボード（$99-499/月想定 · Untappd B2B型）。B2C UGC が貯まってから商品化。
+    </p>
+  </div>
+</section>
+
+<!-- Roadmap -->
+<section class="section glow">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="chip mb-4">ROADMAP</div>
+    <h2 class="serif text-3xl md:text-4xl mb-10">タイムライン</h2>
+    <div class="grid md:grid-cols-2 gap-12">
+      <div class="timeline">
+        <div class="tl-item done">
+          <div class="text-xs accent">2026-05-08 — DONE</div>
+          <div class="serif text-lg mt-1">市場検証 + LP 公開</div>
+          <div class="text-sm mt-1" style="color:var(--muted)">OCR 実測 / Reddit r/Sake 検証投稿 / LP デプロイ / 商標調査</div>
+        </div>
+        <div class="tl-item done">
+          <div class="text-xs accent">2026-05-09 — DONE</div>
+          <div class="serif text-lg mt-1">戦略Y決定 + Phase 1-2 着工</div>
+          <div class="text-sm mt-1" style="color:var(--muted)">マニア層直撃 Vivino型 + WSET学習プロモード / Lovable Phase 1 (foundation) + Phase 2 (auth+DB schema 5 テーブル + RLS + 1294 銘柄 CSV 投入)</div>
+        </div>
+        <div class="tl-item done">
+          <div class="text-xs accent">2026-05-10 — DONE</div>
+          <div class="serif text-lg mt-1">Phase 2-3 完走 · V0.1 コアループ Live</div>
+          <div class="text-sm mt-1" style="color:var(--muted)">auth → onboarding → 1-tap OCR → fuzzy match → save の物理証明済 (花陽浴/桐生善で実測 / check_ins INSERT / Storage upload / Edge Function deploy)</div>
+        </div>
+        <div class="tl-item now">
+          <div class="text-xs accent">2026-05-11〜12 — NOW</div>
+          <div class="serif text-lg mt-1">Phase 4-6 (feed / profile / search / about)</div>
+          <div class="text-sm mt-1" style="color:var(--muted)">Phase 4 (feed + profile + 47都道府県マップ + Kudos + romaji 併記) → Phase 5 (search filter + i18n) → Phase 6 (about + polish)</div>
+        </div>
+        <div class="tl-item">
+          <div class="text-xs" style="color:var(--muted)">2026-05-13〜19</div>
+          <div class="serif text-lg mt-1">クローズドベータ</div>
+          <div class="text-sm mt-1" style="color:var(--muted)">Reddit反応者4名 + WSET 知人5-10名招待。「What would make you keep logging sake every week?」一次情報収集。</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="text-xs" style="color:var(--muted)">2026-05〜31</div>
+          <div class="serif text-lg mt-1">Phase 1.5</div>
+          <div class="text-sm mt-1" style="color:var(--muted)">WSET 学習タグ + flashcard / 初期データ拡張 / wishlist</div>
+        </div>
+        <div class="tl-item">
+          <div class="text-xs" style="color:var(--muted)">2026-06 前半</div>
+          <div class="serif text-lg mt-1">Phase 2</div>
+          <div class="text-sm mt-1" style="color:var(--muted)">ラベル平坦化 / where-to-buy 統合 / 蔵元プロファイル</div>
+        </div>
+        <div class="tl-item">
+          <div class="text-xs" style="color:var(--muted)">2026-06 後半</div>
+          <div class="serif text-lg mt-1">Public Launch</div>
+          <div class="text-sm mt-1" style="color:var(--muted)">r/Sake / Discord 本投稿 / Reddit 紹介投稿で告知</div>
+        </div>
+        <div class="tl-item">
+          <div class="text-xs" style="color:var(--muted)">2026-07〜</div>
+          <div class="serif text-lg mt-1">Phase 3 蔵元 B2B</div>
+          <div class="text-sm mt-1" style="color:var(--muted)">月2-3蔵訪問取材 → ダッシュボード商品化</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tech & Status -->
+<section class="section">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="chip mb-4">TECH & STATUS</div>
+    <h2 class="serif text-3xl md:text-4xl mb-10">運用の骨</h2>
+    <div class="grid md:grid-cols-2 gap-12">
+      <div>
+        <h3 class="serif text-xl mb-4">Stack</h3>
+        <table class="spec w-full">
+          <tr><td>Frontend</td><td>TanStack Start + TypeScript + Tailwind (via Lovable)</td></tr>
+          <tr><td>Backend</td><td>Supabase sakedex-prod / Tokyo (Auth / Postgres / Storage / Edge Functions)</td></tr>
+          <tr><td>OCR</td><td>Anthropic Claude vision (claude-opus-4-7) via Supabase Edge Function</td></tr>
+          <tr><td>Hosting</td><td>Vercel (Phase 6 で接続予定)</td></tr>
+          <tr><td>Build env</td><td>Lovable.dev (MVP scaffolding) — Free tier daily 5 credits 運用</td></tr>
+          <tr><td>Domain</td><td>sakedex.io (取得予定 · Phase 6 タイミング)</td></tr>
+          <tr><td>i18n</td><td>EN / JA + 文化アクセント残し（Phase 5）</td></tr>
+        </table>
+        <h3 class="serif text-xl mt-8 mb-4">Validation Signals</h3>
+        <table class="spec w-full">
+          <tr><td>Reddit r/Sake post (5/8)</td><td>5 score · 11 cmt · 0.69 upvote ratio (5/10 baseline)</td></tr>
+          <tr><td>Quality of comments</td><td>◎ freemium要請×2 / OCR + label flatten 要望×2 / 戦略懐疑×1 / 競合発見×1</td></tr>
+          <tr><td>OCR live in prod</td><td>✓ 花陽浴・桐生善で brand/brewer/prefecture/class/rice 全フィールド抽出に物理成功 (5/10)</td></tr>
+          <tr><td>Auth → DB → Storage</td><td>✓ /signup → /onboarding → /checkin → check_ins INSERT + label-photos upload まで動作証明 (5/10)</td></tr>
+          <tr><td>Seed DB</td><td>1,296銘柄 (1294 + 花陽浴/桐生善 user contributed) / 41都道府県 / 126蔵</td></tr>
+          <tr><td>Trademark</td><td>"Sakedex" 4DB 未登録 / sakedex.io 空き</td></tr>
+          <tr><td>UX motivation research</td><td>10 サービス分析 (Vivino/Untappd/Sakenomy/Letterboxd/Beli/Strava/Duolingo/Goodreads/Last.fm/Pokémon GO)</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3 class="serif text-xl mb-4">差別化マトリクス</h3>
+        <div class="card overflow-hidden">
+          <table class="w-full text-sm">
+            <thead style="background:#161616">
+              <tr style="color:var(--muted)">
+                <th class="text-left p-3 font-medium"></th>
+                <th class="text-center p-3 font-medium accent">Sakedex</th>
+                <th class="text-center p-3 font-medium">OneSip</th>
+                <th class="text-center p-3 font-medium">Vivino</th>
+                <th class="text-center p-3 font-medium">さけのわ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="p-3" style="color:var(--muted)">日本酒専業</td><td class="text-center accent">✓</td><td class="text-center">✓</td><td class="text-center">—</td><td class="text-center">✓</td></tr>
+              <tr><td class="p-3" style="color:var(--muted)">英語ファースト</td><td class="text-center accent">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">—</td></tr>
+              <tr><td class="p-3" style="color:var(--muted)">OCR 自動入力</td><td class="text-center accent">✓ 高精度</td><td class="text-center">△ 基本のみ</td><td class="text-center">✓</td><td class="text-center">—</td></tr>
+              <tr><td class="p-3" style="color:var(--muted)">数値フィルタ</td><td class="text-center accent">✓ V0.1</td><td class="text-center">△ 一部</td><td class="text-center">✓</td><td class="text-center">△</td></tr>
+              <tr><td class="p-3" style="color:var(--muted)">WSET 学習</td><td class="text-center accent">✓ Phase 1.5</td><td class="text-center">—</td><td class="text-center">—</td><td class="text-center">—</td></tr>
+              <tr><td class="p-3" style="color:var(--muted)">蔵元一次取材</td><td class="text-center accent">✓ Made in Tokyo</td><td class="text-center">—</td><td class="text-center">—</td><td class="text-center">△</td></tr>
+              <tr><td class="p-3" style="color:var(--muted)">アクティブ運用</td><td class="text-center accent">✓ 着手中</td><td class="text-center">△ 1年停滞</td><td class="text-center">✓</td><td class="text-center">✓</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-xs" style="color:var(--muted)">※ 競合評価は2026-05時点の公開情報・直接調査ベース。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<section class="section">
+  <div class="max-w-6xl mx-auto px-6 py-12 text-center">
+    <div class="serif text-2xl accent mb-2">Sakedex</div>
+    <p class="text-sm" style="color:var(--muted)">Made in Tokyo by a sake-passionate marketer.</p>
+    <p class="text-xs mt-4" style="color:var(--muted)">Internal draft — 2026-05-10 updated · Private viewing only · Do not redistribute without owner consent.</p>
+  </div>
+</section>
+
+</body>
+</html>
