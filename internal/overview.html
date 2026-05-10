@@ -403,16 +403,73 @@
         <div class="text-sm mt-2" style="color:var(--muted)">英語ファーストの記録 SNS は実質未成熟（先行 OneSip も停滞気味）</div>
       </div>
     </div>
-    <p class="mt-8 text-base" style="color:var(--muted);max-width:760px">
-      Vivino はワイン市場で 70M ユーザー / ARR $250M+ に達した。日本酒は同等のグローバル記録 SNS が存在しない —— その椅子が空いている。
+    <p class="mt-8 text-base" style="color:var(--muted);max-width:780px;line-height:2">
+      ワイン市場では同型のサービスが、10 年で 70M ユーザー・年商 $250M+ に成長した実例がある。日本酒では同等の英語ファースト・グローバル記録 SNS が存在しない —— その椅子が空いている。
     </p>
+  </div>
+</section>
+
+<!-- Benchmark: Vivino -->
+<section class="section glow">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="chip mb-5"><span class="section-num">04</span> Benchmark: Vivino</div>
+    <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">ベンチマークは <span class="accent">Vivino</span>。</h2>
+    <p class="en-sub text-lg mb-7">— The wine world's playbook.</p>
+    <p class="text-base mb-10" style="color:var(--muted);max-width:780px;line-height:2.05">
+      Sakedex は <strong style="color:var(--text)">Vivino</strong>（2010年〜、デンマーク発のワイン記録 SNS）を直接ベンチマークしている。日本ではほぼ無名だが、海外ワインカルチャーでは「飲んだら開く」アプリの定番。10 年で 70M ユーザー・年商 $250M+ に成長した。<strong style="color:var(--text)">この構造を、日本酒・英語ファースト・東京発で再現する</strong>のが Sakedex の設計。
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <div class="card p-6">
+        <div class="text-xs accent mb-2" style="letter-spacing:.18em">FUNCTION ①</div>
+        <h3 class="ja-display text-xl mb-3">写真スキャン → 即時識別</h3>
+        <p class="text-sm" style="color:var(--muted);line-height:1.95">5 億+ ワインの DB から、ラベル写真 1 枚で銘柄を瞬時にマッチング。Sakedex の OCR + DB 照合と同型。</p>
+        <div class="en-sub text-xs mt-3">— Photo → DB match in under a second.</div>
+      </div>
+      <div class="card p-6">
+        <div class="text-xs accent mb-2" style="letter-spacing:.18em">FUNCTION ②</div>
+        <h3 class="ja-display text-xl mb-3">My Cellar（個人記録）</h3>
+        <p class="text-sm" style="color:var(--muted);line-height:1.95">飲んだワインが累積される自分専用のコレクション。「美味しかったやつをもう一度」を支える、記憶の外部化エンジン。</p>
+        <div class="en-sub text-xs mt-3">— Personal cellar, your memory archive.</div>
+      </div>
+      <div class="card p-6">
+        <div class="text-xs accent mb-2" style="letter-spacing:.18em">FUNCTION ③</div>
+        <h3 class="ja-display text-xl mb-3">コミュニティ平均評価</h3>
+        <p class="text-sm" style="color:var(--muted);line-height:1.95">数百万ユーザーの集合評価が「4.2 / 5.0」スコアに集約される。「他のファンはどう感じたか」が即座に見える。</p>
+        <div class="en-sub text-xs mt-3">— Crowdsourced rating, instant context.</div>
+      </div>
+      <div class="card p-6">
+        <div class="text-xs accent mb-2" style="letter-spacing:.18em">FUNCTION ④</div>
+        <h3 class="ja-display text-xl mb-3">Match for You（AI レコメンド）</h3>
+        <p class="text-sm" style="color:var(--muted);line-height:1.95">自分の好みに合うワインを AI が推奨。Pro プラン限定機能で、Vivino の課金 trigger の主軸。</p>
+        <div class="en-sub text-xs mt-3">— AI taste-match, the paid hook.</div>
+      </div>
+      <div class="card p-6">
+        <div class="text-xs accent mb-2" style="letter-spacing:.18em">FUNCTION ⑤</div>
+        <h3 class="ja-display text-xl mb-3">Marketplace（アプリ内購入）</h3>
+        <p class="text-sm" style="color:var(--muted);line-height:1.95">気になったワインをそのままアプリ内で購入できる。アフィリエイト + 直販で年商 $250M+ の主柱に成長。</p>
+        <div class="en-sub text-xs mt-3">— In-app purchase, the revenue spine.</div>
+      </div>
+      <div class="card p-6" style="border-color:rgba(200,169,115,.5);background:rgba(200,169,115,.06)">
+        <div class="text-xs accent mb-2" style="letter-spacing:.18em">→ SAKEDEX が引用するもの</div>
+        <h3 class="ja-display text-xl mb-3">①②③ + ⑤ を採用</h3>
+        <p class="text-sm" style="color:var(--muted);line-height:1.95">写真識別・個人記録・コミュニティ評価・Where-to-buy を V0.1〜V0.2 で実装。④（AI レコメンド）は Pro 機能として V0.2+ で導入予定。</p>
+      </div>
+    </div>
+
+    <div class="card p-6" style="border-color:rgba(200,169,115,.3)">
+      <div class="text-xs accent mb-3" style="letter-spacing:.18em">★ なぜ「日本酒版 Vivino」が成立するか</div>
+      <p class="text-base" style="color:var(--text);line-height:2">
+        Vivino はワイン文化の「言語の壁」（フランス語・イタリア語のラベル）を OCR と DB で英語化して成功した。日本酒は <strong>「漢字の壁」</strong>がさらに高い。<span class="accent">海外ファンが Hanaabi（花陽浴）と読めない・覚えられない・買えない</span>問題を、ワインで解いた同じ手法で日本酒に適用する。
+      </p>
+    </div>
   </div>
 </section>
 
 <!-- Target -->
 <section class="section glow">
   <div class="max-w-6xl mx-auto px-6 py-16">
-    <div class="chip mb-5"><span class="section-num">04</span> Target Users</div>
+    <div class="chip mb-5"><span class="section-num">05</span> Target Users</div>
     <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">三層に向けて、順番に届ける。</h2>
     <p class="en-sub text-lg mb-10">— Three layers, in order.</p>
     <div class="grid md:grid-cols-3 gap-6">
@@ -438,7 +495,7 @@
 <!-- Key Screens -->
 <section class="section">
   <div class="max-w-6xl mx-auto px-6 py-16">
-    <div class="chip mb-5"><span class="section-num">05</span> Key Screens · V0.1</div>
+    <div class="chip mb-5"><span class="section-num">06</span> Key Screens · V0.1</div>
     <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">主要画面のラフ。</h2>
     <p class="en-sub text-lg mb-10">— Detail, search, profile.</p>
     <div class="grid md:grid-cols-3 gap-8">
@@ -613,7 +670,7 @@
 <!-- Differentiation -->
 <section class="section glow">
   <div class="max-w-6xl mx-auto px-6 py-16">
-    <div class="chip mb-5"><span class="section-num">06</span> Differentiation</div>
+    <div class="chip mb-5"><span class="section-num">07</span> Differentiation</div>
     <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">何で勝つか。</h2>
     <p class="en-sub text-lg mb-10">— Why Sakedex.</p>
     <div class="grid md:grid-cols-2 gap-6">
@@ -641,10 +698,56 @@
   </div>
 </section>
 
+<!-- Why not Google? -->
+<section class="section">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="chip mb-5"><span class="section-num">08</span> Why not Google?</div>
+    <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">なぜ <span class="accent">Google レンズ</span>で足りないのか。</h2>
+    <p class="en-sub text-lg mb-7">— Google answers once. Sakedex accumulates.</p>
+    <p class="text-base mb-10" style="color:var(--muted);max-width:780px;line-height:2.05">
+      最も鋭い問い：「写真撮ってラベル識別なら Google レンズで十分では？」 答え：<strong style="color:var(--text)">識別はできても、その後の体験が積み上がらない</strong>。Vivino / Untappd / Letterboxd / GoodReads が Google で代替できないのと同じ構造。
+    </p>
+
+    <div class="card overflow-hidden mb-8">
+      <table class="w-full text-sm">
+        <thead style="background:#161616">
+          <tr style="color:var(--muted)">
+            <th class="text-left p-3 font-medium" style="font-family:'Noto Sans JP',sans-serif">体験</th>
+            <th class="text-center p-3 font-medium" style="font-family:'Noto Sans JP',sans-serif">Google レンズ / 画像検索</th>
+            <th class="text-center p-3 font-medium accent" style="font-family:'Noto Sans JP',sans-serif">Sakedex</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="p-3" style="color:var(--muted)">ラベル写真 → 銘柄 OCR</td><td class="text-center">✓</td><td class="text-center accent">✓</td></tr>
+          <tr><td class="p-3" style="color:var(--muted)">構造化スペック<br><span class="text-xs">SMV・精米歩合・原料米・酸度・蔵元情報</span></td><td class="text-center">△ 断片的<br><span class="text-xs">蔵元 HP / Wikipedia 任せ</span></td><td class="text-center accent">✓ 1,294 銘柄に網羅</td></tr>
+          <tr><td class="p-3" style="color:var(--muted)">個人記録（再認識・思い出し）</td><td class="text-center">✗</td><td class="text-center accent">✓ My dex</td></tr>
+          <tr><td class="p-3" style="color:var(--muted)">同じ酒を飲んだ他人の評価・感想</td><td class="text-center">✗</td><td class="text-center accent">✓ コミュニティ評価</td></tr>
+          <tr><td class="p-3" style="color:var(--muted)">コレクション・進捗可視化</td><td class="text-center">✗</td><td class="text-center accent">✓ 47 都道府県マップ</td></tr>
+          <tr><td class="p-3" style="color:var(--muted)">学習装置（WSET 試験範囲・style 別）</td><td class="text-center">✗</td><td class="text-center accent">✓ Phase 5+ Pro</td></tr>
+          <tr><td class="p-3" style="color:var(--muted)">Where-to-buy（在庫アラート）</td><td class="text-center">△ 雑な検索結果のみ</td><td class="text-center accent">✓ Pro</td></tr>
+          <tr><td class="p-3" style="color:var(--muted)">Romaji 併記で漢字読めなくても伝わる</td><td class="text-center">✗</td><td class="text-center accent">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card p-7" style="border-color:rgba(200,169,115,.4);background:rgba(200,169,115,.04)">
+      <div class="text-xs accent mb-4" style="letter-spacing:.2em">★ CORE DIFFERENCE</div>
+      <p class="ja-display text-lg sm:text-xl" style="line-height:2.05">
+        Google レンズは <span style="color:var(--muted)">「この瓶は何？」</span>に <span class="accent">一度だけ</span>答える。<br>
+        Sakedex は <span class="accent">「あなたが日本酒とどう出会い、何を覚え、誰と語ったか」</span>が積み上がる場所。
+      </p>
+    </div>
+
+    <p class="text-base mt-7" style="color:var(--muted);max-width:780px;line-height:2">
+      書籍も映画もワインも、Google で検索はできるが、Bookmeter / Filmarks / Vivino のような UGC SNS が別カテゴリとしてずっと使われ続けている。<strong style="color:var(--text)">「単発の答え」と「累積する物語」</strong>は別のニーズ。
+    </p>
+  </div>
+</section>
+
 <!-- Motivation Design (NEW) -->
 <section class="section">
   <div class="max-w-6xl mx-auto px-6 py-16">
-    <div class="chip mb-5"><span class="section-num">07</span> Motivation Design</div>
+    <div class="chip mb-5"><span class="section-num">09</span> Motivation Design</div>
     <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">投稿者の動機を、設計する。</h2>
     <p class="en-sub text-lg mb-7">— Why they keep posting.</p>
     <p class="text-base mb-10" style="color:var(--muted);max-width:760px;line-height:2">
@@ -699,7 +802,7 @@
 <!-- Pricing -->
 <section class="section">
   <div class="max-w-6xl mx-auto px-6 py-16">
-    <div class="chip mb-5"><span class="section-num">08</span> Pricing</div>
+    <div class="chip mb-5"><span class="section-num">10</span> Pricing</div>
     <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">無料の地に、有料を植える。</h2>
     <p class="en-sub text-lg mb-10">— Free soil, paid orchard.</p>
     <div class="grid md:grid-cols-2 gap-6">
@@ -738,7 +841,7 @@
 <!-- Roadmap -->
 <section class="section glow">
   <div class="max-w-6xl mx-auto px-6 py-16">
-    <div class="chip mb-5"><span class="section-num">09</span> Roadmap</div>
+    <div class="chip mb-5"><span class="section-num">11</span> Roadmap</div>
     <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">いつ、何を出すか。</h2>
     <p class="en-sub text-lg mb-10">— Timeline.</p>
     <div class="grid md:grid-cols-2 gap-12">
@@ -798,7 +901,7 @@
 <!-- Tech & Status -->
 <section class="section">
   <div class="max-w-6xl mx-auto px-6 py-16">
-    <div class="chip mb-5"><span class="section-num">10</span> Tech & Status</div>
+    <div class="chip mb-5"><span class="section-num">12</span> Tech & Status</div>
     <h2 class="ja-display text-3xl sm:text-4xl md:text-5xl mb-4">運用の骨。</h2>
     <p class="en-sub text-lg mb-10">— The bones.</p>
     <div class="grid md:grid-cols-2 gap-12">
